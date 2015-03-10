@@ -1,0 +1,14 @@
+Para sincronizar con el master:
+
+	situarse en la carpeta ingenieria de software de git hub con el comando cd directorio
+	ejecutar git fetch upstream
+	ejecutar git merge upstream/master
+
+
+Para subir nuevos ficheros:
+
+	Modificar o crear los ficheros dentro de la carpeta ingenieria de software de git hub
+	En la aplicacion de Git hub, realizar un commit con una descripción y sincronizarlo.
+
+ADVERTENCIA: Si entrais en la pagina de git hub podreis ver que todos podeis aceptar los cambios realizados. Por favor,
+no autorizeis ninguno puesto que sino no sabré que cambios ha realizado cada uno y será más dificil organizar todo.
