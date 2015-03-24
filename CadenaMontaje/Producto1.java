@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Producto1 extends Producto {
 
-    ArrayList<Elemento> componentes;
+    //ArrayList<Elemento> componentes;
 
     Producto1(){
         componentes=new ArrayList<Elemento>();
@@ -34,7 +34,9 @@ public class Producto1 extends Producto {
             }
 
         }
+        //Producto1 p1=new Producto1();p1.almacenate(almacenes);
 
+        //almacenes.get(0).almacena(this);// ¿Que pasa cuando hemos fabricado un producto?
         return this;
 
     }
