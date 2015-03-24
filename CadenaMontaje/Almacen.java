@@ -1,7 +1,9 @@
 package CadenaMontaje;
 
-import sun.jvm.hotspot.utilities.CPPExpressions;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -9,14 +11,15 @@ import java.util.ArrayList;
  */
 public class Almacen {
 
-    ArrayList<Elemento> contenido;
+    public ArrayList<Elemento> contenido;
     //int capacidad;
 
     Almacen(ArrayList<Elemento> contenido){this.contenido=contenido;}
 
     public Elemento dameElemento(Elemento e) throws ExcepcionNoPiezaAlmacen {
-        Elemento resultado=null;
-        Boolean encontrado=false;
+
+
+
 
         for (Elemento i:contenido) {
 
@@ -26,10 +29,26 @@ public class Almacen {
 
             }
 
-           // resultado = ;
+        }
+
+        //TODO LO SIGUIENTE SE VA A CAMBIAR
+
+
+        if(e instanceof Pieza){
+            System.out.println("No tenemos la pieza:" +  " necesarias en el almacen");
+        //Guarrerida maxima
+        BufferedReader linea = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("¿Desea pedir pieza al proveedor?- [SI,NO]");
+        try {
+            String respuesta = linea.readLine();
+            if(respuesta.equals("SI")){contenido.add(e);}
+        } catch (IOException e1) {}
 
 
         }
+
+
+
         throw new ExcepcionNoPiezaAlmacen("No tenemos esa pieza");
 
 
@@ -46,10 +65,9 @@ public class Almacen {
 
 
 
-    public static void main(String[] args)  {
+   //GETTERS Y SETTERS
 
-
-    }
+    public ArrayList<Elemento> getContenido(){return contenido;}
 
 
 }

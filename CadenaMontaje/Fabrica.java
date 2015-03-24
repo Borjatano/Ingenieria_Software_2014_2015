@@ -66,11 +66,11 @@ public class Fabrica {
 
         while(!fin){//Una guarreria peeeeeeero
 
-            System.out.print("¿desea fabricar el producto1?");
+            System.out.print("¿Desea fabricar el producto1? - [SI,NO]");
             String respuesta = linea.readLine();
-            if(respuesta.equals("No")){fin = true;}
+            if(respuesta.equals("NO")){fin = true;}
             else{
-
+                System.out.println("El almacen ahora mismo contiene "+almacenes.get(0).contenido.size()+" piezas");
                 f1.fabricar(prod1);
 
             }
@@ -84,3 +84,9 @@ public class Fabrica {
 
 
 }
+
+
+/*
+* Poner algoritmoFabricar que solo fabrique
+* y que fabrica lo guarde en almacen
+* */

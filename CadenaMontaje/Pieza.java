@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public  class Pieza implements Elemento {
 
 
+
     @Override
     public Elemento prestate(ArrayList<Almacen> almacenes) throws ExcepcionNoPiezaNingunAlmacen {
 
@@ -47,7 +48,7 @@ public  class Pieza implements Elemento {
     }
 
     @Override
-    public  Elemento algoritmo(ArrayList<Almacen> almacenes) {
+    public  Elemento algoritmo(ArrayList<Almacen> almacenes) {//Esto sera luego abstracto
         Elemento resultado=null;
         try {
 
@@ -56,7 +57,7 @@ public  class Pieza implements Elemento {
 
         } catch (ExcepcionNoPiezaNingunAlmacen error) {
 
-           System.out.print("No tenemos la piezas necesarias en el almacen");
+
 
         }
 
@@ -64,6 +65,7 @@ public  class Pieza implements Elemento {
 
     }
 
+//GETTERS AND SETTERS
 
 }
 

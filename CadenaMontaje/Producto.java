@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public abstract class Producto implements Elemento{
 
+    ArrayList<Elemento> componentes;
 
     @Override
     public Elemento prestate(ArrayList<Almacen> almacenes) throws ExcepcionNoPiezaNingunAlmacen {
