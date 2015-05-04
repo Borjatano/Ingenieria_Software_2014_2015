@@ -1,73 +1,25 @@
 package CadenaMontaje;
 
-import java.util.ArrayList;
-
 /**
- * Created by migueldelgadopineda on 17/03/15.
+ * Created by migueldelgadopineda on 30/04/15.
  */
-public  class Pieza implements Elemento {
+public class Pieza extends Elemento {
 
+    ControlAbastecimiento controlAbastecimiento;
+    //Algo Para saber como se dibujan
 
-
-    @Override
-    public Elemento prestate(ArrayList<Almacen> almacenes) throws ExcepcionNoPiezaNingunAlmacen {
-
-        Elemento resultado = null;
-        Boolean encontrado=false;
-
-       try{
-
-           for (int i = 0;!encontrado ; i++) {
-
-
-               try{
-
-                   resultado=  almacenes.get(i).dameElemento(this);
-                   encontrado=true;
-
-
-               }catch (ExcepcionNoPiezaAlmacen e){
-                   //El almacen no tiene esa pieza, asique pasamos al siguiente
-
-               }
-
-
-
-           }
-
-       }catch (IndexOutOfBoundsException e){//En ningun almacen hay esa pieza, se trata de alguna manera
-           throw new ExcepcionNoPiezaNingunAlmacen("La fabrica no tiene la pieza en ningun almacen");
-       }
-
-        return resultado;
-    }
+    public Pieza(ControlAbastecimiento cA){this.controlAbastecimiento=cA;}
 
     @Override
-    public void almacenate(ArrayList<Almacen> almacenes) {//Provedor llama a este metodo
+    public Elemento fabricar(Almacen alf) {//Proveer
 
+        this.controlAbastecimiento.mandaProveer(this);
+
+        return this;
     }
 
-    @Override
-    public  Elemento algoritmo(ArrayList<Almacen> almacenes) {//Esto sera luego abstracto
-        Elemento resultado=null;
-        try {
-
-            resultado=this.prestate(almacenes);
-
-
-        } catch (ExcepcionNoPiezaNingunAlmacen error) {
-
-
-
-        }
-
-        return resultado;
-
+    public void controlarDisponibilidad(Almacen alf){
+    	this.controlAbastecimiento.verDisponibilidad(this,alf);
     }
-
-//GETTERS AND SETTERS
 
 }
-
-
-

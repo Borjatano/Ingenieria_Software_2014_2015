@@ -1,73 +1,40 @@
 package CadenaMontaje;
 
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Created by migueldelgadopineda on 17/03/15.
+ * Created by migueldelgadopineda on 28/04/15.
  */
 public class Almacen {
 
-    public ArrayList<Elemento> contenido;
-    //int capacidad;
+    private ArrayList<Elemento> listaElementos;
 
-    Almacen(ArrayList<Elemento> contenido){this.contenido=contenido;}
+    public Almacen (ArrayList<Elemento> listaElementos){this.listaElementos=listaElementos;}
 
     public Elemento dameElemento(Elemento e) throws ExcepcionNoPiezaAlmacen {
-
-
-
-
-        for (Elemento i:contenido) {
-
-            if (i.getClass().equals(e.getClass())){
-                contenido.remove(i);
-                return i;
-
-            }
-
+        //Veo imposible que el almacen no se mire a si mismo
+    	Elemento resultado;
+        //Como yo se hacerlo
+    	int indice=listaElementos.indexOf(e);
+        if(indice!=-1){
+        	resultado=listaElementos.get(indice);
+        	listaElementos.remove(indice);
+        	return resultado;
+        }
+        else{throw new ExcepcionNoPiezaAlmacen("No tenemos esa pieza");}
         }
 
-        //TODO LO SIGUIENTE SE VA A CAMBIAR
+    public void meteElemento (Elemento e){
 
-
-        if(e instanceof Pieza){
-            System.out.println("No tenemos la pieza:" +  " necesarias en el almacen");
-        //Guarrerida maxima
-        BufferedReader linea = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("¿Desea pedir pieza al proveedor?- [SI,NO]");
-        try {
-            String respuesta = linea.readLine();
-            if(respuesta.equals("SI")){contenido.add(e);}
-        } catch (IOException e1) {}
-
-
-        }
-
-
-
-        throw new ExcepcionNoPiezaAlmacen("No tenemos esa pieza");
+        listaElementos.add(e);
 
 
     }
 
+    //GETTERS Y SETTERS
 
-    public void almacena(Elemento e) /*throws ExcepcionAlmacenLleno*/{
-
-        contenido.add(e);
-
-    }
-
-
-
-
-
-   //GETTERS Y SETTERS
-
-    public ArrayList<Elemento> getContenido(){return contenido;}
+    public ArrayList<Elemento> getLista(){return this.listaElementos;}
+    
 
 
 }

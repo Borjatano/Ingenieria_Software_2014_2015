@@ -1,64 +1,29 @@
 package CadenaMontaje;
 
-import java.util.ArrayList;
-
 /**
- * Created by migueldelgadopineda on 17/03/15.
+ * Created by migueldelgadopineda on 30/04/15.
  */
-public abstract class Producto implements Elemento{
+public class Producto extends Elemento {
 
-    ArrayList<Elemento> componentes;
+    private ModoMontaje modoMontaje;
+
+    public Producto (ModoMontaje mm){this.modoMontaje=mm;}
+
 
     @Override
-    public Elemento prestate(ArrayList<Almacen> almacenes) throws ExcepcionNoPiezaNingunAlmacen {
-        Elemento resultado = null;
-        Boolean encontrado=false;
+    public Elemento fabricar(Almacen alf) {
+        try {
+            modoMontaje.obtencion(alf);
+            System.out.println("Se ha producido un poducto");
+            //Una vez se ha obtenido,manda dibujarse y se almacena
+            //AQUI VA EL DIBUJARSE
+            this.almacenate(alf);
 
-
-            for (int i = 0;i<almacenes.size()&&!encontrado ; i++) {
-
-
-                try{
-
-                    resultado= almacenes.get(i).dameElemento(this);
-                    encontrado=true;
-
-
-                }catch (ExcepcionNoPiezaAlmacen e){
-                    //El almacen no tiene esa pieza, asique pasamos al siguiente
-
-                }
-
-
-
-            }
-
-        if(!encontrado){throw new ExcepcionNoPiezaNingunAlmacen("No hay pieza en ningun almacen");}
-
-        return resultado;
-    }
-
-    @Override
-    public void almacenate(ArrayList<Almacen> almacenes) {
-        Boolean almacenado=false;
-
-        for (int i = 0; !almacenado; i++) {
-
-            almacenes.get(i).almacena(this);
-            almacenado=true;
-
-
+        } catch (ExcepcionNoPiezaAlmacen excepcionNoPiezaAlmacen) {
+            //excepcionNoPiezaAlmacen.printStackTrace();
+            //Pasaria algo?
         }
 
-
-
+        return this;
     }
-
-
-    @Override
-    public abstract Elemento algoritmo(ArrayList<Almacen> almacenes) ;
-
-
-
-
 }

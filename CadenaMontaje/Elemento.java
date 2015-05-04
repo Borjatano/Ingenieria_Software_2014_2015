@@ -1,19 +1,35 @@
 package CadenaMontaje;
 
-import java.util.ArrayList;
-
 /**
- * Created by migueldelgadopineda on 17/03/15.
+ * Created by migueldelgadopineda on 28/04/15.
  */
-public interface Elemento {
+public abstract class Elemento {
 
-    //private String tipo;
-    //private boolean disponibilidad;
 
-    public Elemento prestate(ArrayList<Almacen> almacenes) throws ExcepcionNoPiezaNingunAlmacen;
+    public abstract Elemento fabricar (Almacen alf);
 
-    public void almacenate(ArrayList<Almacen> almacenes);//se guarda en algun almacen.
+    public Elemento prestate(Almacen alf) throws ExcepcionNoPiezaAlmacen {
+        //Elemento resultado = new Elemento();
+        //Manda al almacen que le envie elementos hasta que se encuentre?Â¿Como sabe el tamaÃ±o del array del almacen?Â¿Cuando para?
+        Elemento resultado;
+        //Cambialo si sabes hacerlo de la otra forma
+        try {
+            resultado=alf.dameElemento(this);
+            if(resultado instanceof Pieza){
+            	((Pieza) resultado).controlarDisponibilidad(alf);
+            }
 
-    public Elemento algoritmo(ArrayList<Almacen> almacenes);
+            return resultado;
+        } catch (ExcepcionNoPiezaAlmacen excepcionNoPiezaAlmacen) {
+            //Si no esta ese elemento en el almacen, que mande un mensaje a pantalla?
+            throw new ExcepcionNoPiezaAlmacen("");
+        }
 
+
+
+
+    }
+    public void almacenate(Almacen alf){
+        alf.meteElemento(this);
+    }
 }

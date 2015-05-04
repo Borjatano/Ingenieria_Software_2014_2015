@@ -1,92 +1,42 @@
 package CadenaMontaje;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Created by migueldelgadopineda on 17/03/15.
+ * Created by migueldelgadopineda on 22/04/15.
  */
 public class Fabrica {
-    ArrayList<Almacen> almacenes;
-    ArrayList<CadenaMontaje> cadenas;
 
+    private Almacen almacen;
 
-    Fabrica(ArrayList<Almacen> almacenes,ArrayList<CadenaMontaje> cadenas){
-        this.almacenes=almacenes;
-        this.cadenas=cadenas;
-    }
+    public Fabrica(Almacen alf){this.almacen=alf;}
 
-    public void fabricar(Producto p){
-        //Por ahora
-        cadenas.get(0).fabricar(p,almacenes);
+    public void fabricar(Elemento e){
+        e.fabricar(almacen);
 
     }
 
 
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader linea = new BufferedReader(new InputStreamReader(System.in));
-
-        //Producto y piezas existentes
-
-        Pieza1 p1 = new Pieza1();
-        Pieza2 p2 = new Pieza2();
-
-        Producto1 prod1=new Producto1();
 
 
+    public static void main(String[] args) {
 
-        CadenaMontaje c1= new CadenaMontaje();
-        ArrayList<CadenaMontaje> cadenas= new ArrayList<CadenaMontaje>();
-        cadenas.add(c1);
+        ArrayList<Elemento> listaElementos=new ArrayList<Elemento>();
+        Almacen al1=new Almacen(listaElementos);
 
-        ArrayList<Almacen> almacenes = new ArrayList<Almacen>();
+        Proveedor p1 = new Proveedor(al1,10);
 
-        //Almacenes a probar y su contenido
+        ControlAbastecimiento c1= new ControlAbastecimiento(p1,10);
+        ControlAbastecimiento c2= new ControlAbastecimiento(p1,20);
 
-
-        ArrayList<Elemento> contenidoA1 = new ArrayList<Elemento>();
-
-        for (int i = 0; i < 2; i++) {
-            contenidoA1.add(p1);
-            contenidoA1.add(p2);
-        }
-        Almacen a1 = new Almacen(contenidoA1);
+        Pieza pieza1= new Pieza(null);
+        Pieza pieza2= new Pieza(null);
 
 
-        //Asignamos los almacenens a la fabrica
-        almacenes.add(a1);
-
-        Fabrica f1 = new Fabrica(almacenes,cadenas);
-
-
-        boolean fin = false;
-
-        while(!fin){//Una guarreria peeeeeeero
-
-            System.out.print("¿Desea fabricar el producto1? - [SI,NO]");
-            String respuesta = linea.readLine();
-            if(respuesta.equals("NO")){fin = true;}
-            else{
-                System.out.println("El almacen ahora mismo contiene "+almacenes.get(0).contenido.size()+" piezas");
-                f1.fabricar(prod1);
-
-            }
-
-
-
-        }
-
+        al1.meteElemento(pieza1);
+        al1.getLista().remove(pieza1);
+        System.out.print(al1.getLista().isEmpty());
 
     }
-
-
 }
-
-
-/*
-* Poner algoritmoFabricar que solo fabrique
-* y que fabrica lo guarde en almacen
-* */
